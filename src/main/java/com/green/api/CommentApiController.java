@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.green.dto.CommentDto;
 import com.green.entity.Comments;
+import com.green.service.CommentService;
 
 @RestController
 public class CommentApiController {
@@ -21,23 +22,27 @@ public class CommentApiController {
 	
 	// 1. 댓글 조회(GET)
 	@GetMapping("/api/articles/{articleId}/comments")
-	public ResponseEntity<List<Comments>> comments(@PathVariable Long articleId){
+	public ResponseEntity<List<CommentDto>> comments(@PathVariable Long articleId){
 		
 		// 정보조회를 서비스에게 위임
 		List<CommentDto> dtos = commentService.comments(articleId);
 		
-		return ResponseEntity.status(HttpStatus.OK).getBody();
+		return ResponseEntity.status(HttpStatus.OK).body(dtos);
 	}
 	// 2. 댓글 생성(POST)
-	@PostMapping("/api/articles/{articleId}/comments")
-	public ResponseEntity<List<Comments>> create(@PathVariable Long articleId){
-		
-		
-	}
-	
-	// 3. 댓글 수정(PATCH)
-	@PatchMapping("/api/comments/{id}")
-	
-	// 4. 댓글 삭제(DELETE)
-	@DeleteMapping("/api/comments/{id}")
+	/*
+	  @PostMapping("/api/articles/{articleId}/comments") public
+	  ResponseEntity<List<Comments>> create(@PathVariable Long articleId){
+	  
+	 
+	  }
+	  
+	  // 3. 댓글 수정(PATCH)
+	  
+	  @PatchMapping("/api/comments/{id}")
+	  
+	  // 4. 댓글 삭제(DELETE)
+	  
+	  @DeleteMapping("/api/comments/{id}")
+	 */
 }

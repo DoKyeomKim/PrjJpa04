@@ -1,5 +1,7 @@
 package com.green.dto;
 
+import com.green.entity.Comments;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,13 @@ public class CommentDto {
 	private String body; // 댓글 내용
 	
 	// CommentDto <- Comments
+	public static CommentDto createCommentDto(Comments comments) {
+		
+		return new CommentDto(
+				comments.getId(),
+				comments.getArticle().getId(),
+				comments.getNickname(),
+				comments.getBody()				
+				);
+	}
 }
