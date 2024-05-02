@@ -1,18 +1,19 @@
 package com.green.repository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
 import com.green.entity.Article;
 
-// extends CrudRepository<Article, Long> 
-// JPA의 CRUD 기능을 동작시키는 클래스
+// extends CrudRepository<Article, Long>
+// JPA의  Crud 기능을 동작시키는 클래스
 public interface ArticleRepository 
     extends CrudRepository<Article, Long> {
+   	
+	// alt+shitf+s : OIverride/Implement method 사용가능한 함수목록확인
 	
-	// alt+shift+s : Override/Impliment Methods로 사용가능한 함수 확인
-
 	@Override
 	ArrayList<Article> findAll();
 
@@ -22,3 +23,8 @@ public interface ArticleRepository
 	// 아래 내용 추가
 	
 }
+
+
+
+
+

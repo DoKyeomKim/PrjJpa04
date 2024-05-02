@@ -17,9 +17,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SequenceGenerator(name="ARTICLE_SEQ_GENERATOR", 
- sequenceName   = "ARTICLE_SEQ", 
- initialValue   = 1,     // 초기값
- allocationSize = 1 )   // 증가치
+   sequenceName   = "ARTICLE_SEQ", 
+   initialValue   = 1,     // 초기값
+   allocationSize = 1 )   // 증가치
 public class Article {
 	// primary key        : @id
 	// 값을 자동으로 채움 : @GeneratedValue
@@ -35,25 +35,30 @@ public class Article {
 	private  String  content;
 	
 	// 자바에 사용하기 위해 만든 내용들
-	// 생성자
+	// 생성자 (@AllArsConstructor)
 	public Article(Long id, String title, String content) {		
 		this.id = id;
 		this.title = title;
 		this.content = content;
 	}
 	
-	// toString
+	// @ToString
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", content=" + content + "]";
 	}
 
-
+	//  수정하기 위한 용도를 추가
 	public void patch(Article article) {
-		if(article.title !=null)
-			this.title = article.title;
-		if(article.content !=null)
-			this.content = article.content;
+		if(article.title != null)
+			this.title   = article.title;
+		if(article.content != null)
+			this.content = article.content;		
 	}
 	
 }
+
+
+
+
+
