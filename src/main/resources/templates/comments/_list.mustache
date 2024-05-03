@@ -4,7 +4,21 @@
   <div class="card-header">
 	{{nickname}}
 	&nbsp;&nbsp;
-	<button type="button" data-id="{{id}}" data-article-id="{{articleId}}" class="btn btn-sm btn-outline-primary">수정</button>
+	<!-- Button trigger -->
+	
+	<!-- 댓글 수정 -->
+	<button type="button" data-id="{{id}}" data-article-id="{{articleId}}" class="btn btn-sm btn-outline-primary"
+	
+	data-bs-toggle="modal"
+	data-bs-target="#comment-edit-modal"
+	data-bs-id="{{id}}"
+	data-bs-nickname="{{nickname}}"
+	data-bs-body="{{body}}"
+	data-bs-article-id="{{articleId}}"
+	
+	>수정</button>
+	
+	<!-- 댓글 삭제 버튼 -->
 	<button type="button" class="btn btn-sm btn-outline-danger comment-delete-btn">삭제</button> ({{id}}, {{articleId}})
   </div>
   <div class="card-body">
@@ -13,3 +27,77 @@
 </div>
   {{/commentDtos}}
 </div>	
+
+
+<!-- Modal -->
+<div class="modal fade" id="comment-edit-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+        <button type="button" 
+        		class="btn-close" 
+        		data-bs-dismiss="modal" 
+        		aria-label="Close">
+        </button>
+      </div>
+      <!-- 수정화면 -->
+      <div class="modal-body">
+        <!-- 댓글 수정 폼-->
+        <form>
+        	<!-- 댓글 id, article id 둘 다 hidden 으로 전송 -->
+        	<input type="hidden" id="edit-comment-id" />
+        	<input type="hidden" id="edit-comment-article-id" />
+        	
+        	<!-- 닉네임 -->
+			<div class="mb-3">
+			<label class="form-label">닉네임</label>
+			<input type="text" class="form-control" id="edit-comment-nickname"/>
+			</div>
+			
+        	<!-- 댓글 본문 -->
+        	<label class="form-label">댓글 본문</label>
+        	<textarea type="text" class="form-control" rows="3" id="edit-comment-body" style="resize:none;"></textarea>
+        	
+	      </div>
+	      <!-- 전송 버튼 -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" id="comment-update-btn">수정 완료</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- 모달 이벤트 처리 (다이얼로그가 화면 나타날때 해야할 일) -->
+<script>
+	// 모달 창을 찾는다.
+	const commentEditModal = document.querySelector('#comment-edit-modal');
+	
+	// 이벤트를 연결
+	commentEditModal.addEventListener('show.bs.modal', (event)=>{
+		alert('show.bs.modal');
+	
+	})
+	commentEditModal.addEventListener('show.bs.modal', (event)=>{
+		alert('shown.bs.modal');
+	
+	})
+	
+</script>
+
+
+
+<!-- 댓글 수정 기능 -->
+<script>
+
+</script>
+
+
+
+
+<!-- 댓글 삭제 기능 -->
+<script>
+
+</script>
