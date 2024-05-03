@@ -65,8 +65,8 @@ public class CommentApiController {
 			@RequestBody   CommentDto  dto   // 수정할 데이터를 가지고있다
 			) {
 		
-		CommentDto  udpateDto = commentService.update(id, dto);		
-		return ResponseEntity.status(HttpStatus.OK).body( udpateDto );	
+		CommentDto  updateDto = commentService.update(id, dto);		
+		return ResponseEntity.status(HttpStatus.OK).body( updateDto );	
 		
 	}
 	

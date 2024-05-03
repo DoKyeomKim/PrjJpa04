@@ -19,7 +19,7 @@
 	>수정</button>
 	
 	<!-- 댓글 삭제 버튼 -->
-	<button type="button" class="btn btn-sm btn-outline-danger comment-delete-btn">삭제</button> ({{id}}, {{articleId}})
+	<button type="button" class="btn btn-sm btn-outline-danger comment-delete-btn" id="comment-delete-btn">삭제</button> ({{id}}, {{articleId}})
   </div>
   <div class="card-body">
 	{{body}}
@@ -72,25 +72,73 @@
 
 <!-- 모달 이벤트 처리 (다이얼로그가 화면 나타날때 해야할 일) -->
 <script>
+	
 	// 모달 창을 찾는다.
 	const commentEditModal = document.querySelector('#comment-edit-modal');
 	
-	// 이벤트를 연결
-	commentEditModal.addEventListener('show.bs.modal', (event)=>{
-		alert('show.bs.modal');
+	// 이벤트를 연결 : show.bs.modal - modal 화면이 그려지기 전
+	commentEditModal.addEventListener("show.bs.modal", (event)=>{
+		
+		
+		// 1. 트리거 버튼 선택
+		const triggerBtn = event.relatedTarget;
+		
+		// 2. 데이터 가져오기
+		let id = triggerBtn.getAttribute("data-bs-id")
+		let nickname = triggerBtn.getAttribute("data-bs-nickname")
+		let body = triggerBtn.getAttribute("data-bs-body")
+		let articleId = triggerBtn.getAttribute("data-bs-article-id")
+		
+		// 3. 수정 폼에 데이터 집어넣기
+		document.querySelector('#edit-comment-nickname').value = nickname;
+		document.querySelector('#edit-comment-body').value = body;
+		document.querySelector('#edit-comment-id').value = id;
+		document.querySelector('#edit-comment-article-id').value = articleId;
+		
+		})
+		
 	
-	})
-	commentEditModal.addEventListener('show.bs.modal', (event)=>{
-		alert('shown.bs.modal');
-	
-	})
-	
+
+
 </script>
-
-
-
+	
+	
+	
 <!-- 댓글 수정 기능 -->
 <script>
+		document.querySelector('#comment-update-btn').addEventListener('click', () => {
+				const nickname = document.querySelector('#edit-comment-nickname').value;
+				const body 	   = document.querySelector('#edit-comment-body').value;
+				const id       = document.querySelector('#edit-comment-id').value;
+				const articleId = document.querySelector('#edit-comment-article-id').value;
+			
+			let url = 'http://localhost:9090/api/comments/'+id;
+			
+			const comment = {
+			        id: id,
+			        article_id: articleId,
+			        nickname: nickname,
+			        body: body
+			    };
+			    
+			const params = {
+					method : 'PATCH',
+					headers: {'Content-Type': 'application/json'},
+			        body: JSON.stringify(comment)
+			        }
+			        
+			fetch(url,params).then(response=>{
+					if(response.ok){
+					alert('댓글 수정 완료');
+					window.location.reload();
+					
+					} else{
+						alert('댓글 수정 실패. 다시 확인해주세요')
+					}
+				})
+				
+			
+		})
 
 </script>
 
@@ -101,3 +149,4 @@
 <script>
 
 </script>
+	
