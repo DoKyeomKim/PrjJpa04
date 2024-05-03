@@ -27,22 +27,22 @@
 <script>
 	const commentCreateBtnEl = document.getElementById('comment-create-btn');
 	commentCreateBtnEl.addEventListener('click', () => {
-		let url = 'http://loacalhost:9090/api/articles/{{id}}/comments';
-		const comment {
+		let url = 'http://localhost:9090/api/articles/{{id}}/comments';
+		const comment = {
 		  // 새 댓글의 nickname
 		  nickname : document.querySelector('#new-comment-nickname').value,
 		  // 새 댓글의 본문
 		  body : document.querySelector('#new-comment-body').value,
 		  // 부모 게시글의 아이디
-		  articleId : document.querySelector('#new-comment-id').value
+		  article_id : document.querySelector('#new-comment-id').value
 		}
 		const params = {
 			method : 'POST',
 			headers : {"Content-Type" : "application/json"},
 			body : JSON.stringify(comment) 
 		}
-		fetch(url, params).then( response => {
-			let cid = response.id;
+		fetch(url,params).then(response => {
+			//let cid = response.id;
 			const msg = (response.ok) ? "댓글이 등록 되었습니다."
 									  : "댓글 등록 실패!";
 									  
